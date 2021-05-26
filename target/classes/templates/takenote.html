@@ -29,8 +29,9 @@
 						<th>Title</th>
 						<th>Content</th>
 						<th>Date</th>
-						<th></th>
-						<th></th>
+						<th>Action</th>
+						<th>Action</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,7 +42,8 @@
 						<td><a th:href="@{/takenote}" class="btn btn-primary">Add Note</a></td>
 						<td><a th:href="@{'/deleted/' + ${note.stt}}"
 							class="btn btn-primary" style="background-color:red" onclick="return confirm('Are you sure?');">Del Notes</a>
-							<a th:href="@{'/edit/' + ${note.stt}}" class="btn btn-primary">Edit Note</a> </td>
+					    </td>
+						<td><a th:href="@{'/edit/' + ${note.stt}}" class="btn btn-primary">Edit Note</a> </td>
 					</tr>
 				</tbody>
 			</table>
