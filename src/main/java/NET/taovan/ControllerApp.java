@@ -1,17 +1,16 @@
 package NET.taovan;
 
+import java.sql.Date;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +40,7 @@ public class ControllerApp {
 		return "signup_form";
 	}
 
+	
 
 	@PostMapping("/process_register")
 	public String processRegistration(User user) {
@@ -113,7 +113,7 @@ public class ControllerApp {
 		return mav;
 	}
 	@RequestMapping("/notes/update")
-	public String update(@Param("keyword") String keyword,Model model,@RequestParam Long stt, @RequestParam String title, @RequestParam String content, @RequestParam String ngaytao) {
+	public String update(@Param("keyword") String keyword,Model model,@RequestParam Long stt, @RequestParam String title, @RequestParam String content, @RequestParam Date ngaytao) {
 		Notes note = note2.findByStt(stt).orElse(null);
 		note.setTieude(title);
 		note.setNoidung(content);
@@ -123,6 +123,30 @@ public class ControllerApp {
 		model.addAttribute("takenote1", notes);
 		return "takenote";
 	}
+	
+	@RequestMapping("/editUser/{id}")
+	public ModelAndView editUser(@PathVariable(name = "id") Long id) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("user", repo.findById(id).orElse(null));
+		mav.setViewName("editUser");
+		return mav;
+	}
+	@RequestMapping("/user/updates")
+	public String update1(Model model,@RequestParam Long id, @RequestParam String email, @RequestParam String password, @RequestParam String firstName,@RequestParam String lastName) {
+		User user = repo3.findByIdd(id).orElse(null);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		repo.save(user);
+		List<User> listUsers = repo.findAll();
+		model.addAttribute("listUsers", listUsers);
+		return "users";
+	}
+	
 	@GetMapping("/notehome")
 	public String viewNote(@AuthenticationPrincipal CustomUserDetails note,Model model) {
 		model.addAttribute("notee",note);

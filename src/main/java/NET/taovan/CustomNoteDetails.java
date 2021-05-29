@@ -20,9 +20,9 @@ public class CustomNoteDetails implements UserDetails{
 	public String getNoidung() {
 		return notes.getNoidung();
 	}
-	public String getNgaytao() {
-		return notes.getNgaytao();
-	}
+//	public Date getNgaytao() {
+//		return notes.getNgaytao();
+//	}
 	
 	
 

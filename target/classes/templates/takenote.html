@@ -5,7 +5,7 @@
 <title>All Notes</title>
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/css/bootstrap.min.css" />
-
+ <link rel="stylesheet"href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 </head>
 <body
 	style="background-position: center; height: 400%; background-repeat: no-repeat; background-size: cover;
@@ -13,7 +13,7 @@
 	<div class="container text-center">
 		<div style= "margin-top: 30px">
 			<p style= "font-size: 40px;margin-bottom: 70px" >
-				<a th:href="@{/notehome}" class="btn btn-primary">Welcom <b>[[${#request.userPrincipal.principal.fullName}]]</b></a>
+				<a th:href="@{/notehome}" class="btn btn-primary"><b>[[${#request.userPrincipal.principal.fullName}]]</b></a>
 			</p>
 
 		</div>
@@ -29,30 +29,30 @@
 						<th>Title</th>
 						<th>Content</th>
 						<th>Date</th>
-						<th>Action</th>
-						<th>Action</th>
-						<th>Action</th>
+						<th>AddNote</th>
+						<th>Del Note</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="note: ${takenote1}">
 						<td th:text="${note.tieude}">Title</td>
 						<td th:text="${note.noidung}">Content</td>
-						<td th:text="${note.ngaytao}">Date</td>
-						<td><a th:href="@{/takenote}" class="btn btn-primary">Add Note</a></td>
+						<td th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(note.ngaytao)}">Date</td>
+						<td><a th:href="@{/takenote}" ><i class="fa fa-plus-circle" style="font-size:20px;color:black"></i></a></td>
 						<td><a th:href="@{'/deleted/' + ${note.stt}}"
-							class="btn btn-primary" style="background-color:red" onclick="return confirm('Are you sure?');">Del Notes</a>
+							 onclick="return confirm('Are you sure?');"><i class="fa fa-trash" style="font-size:20px;color:black"></i></a>
 					    </td>
-						<td><a th:href="@{'/edit/' + ${note.stt}}" class="btn btn-primary">Edit Note</a> </td>
+						<td><a th:href="@{'/edit/' + ${note.stt}}" ><i class="fa fa-edit" style="font-size:20px;color:black" ></i></a> </td>
 					</tr>
 				</tbody>
 			</table>
 			<div>&nbsp;</div>
 			<div>
 				<form style="margin-left: 107px" th:action="@{/takenotes}">
-					Filter: <input type="text" name="keyword" th:value="${keyword}" />
-					&nbsp; <input type="submit" value="Search" /> &nbsp; <input
-						type="button" value="Clear" onclick="clearFilter()" />
+					<input type="text" name="keyword" th:value="${keyword}" />
+					&nbsp; <input type="submit" value="Search" /> &nbsp; 
+					<input type="button" value="Refresh" onclick="clearFilter()"/>
 				</form>
 			</div>
 			<div>&nbsp;</div>
