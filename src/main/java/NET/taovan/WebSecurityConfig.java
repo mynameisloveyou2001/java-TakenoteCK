@@ -2,10 +2,10 @@ package NET.taovan;
 
 import javax.sql.DataSource;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,11 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
 			    .antMatchers("/list_users").authenticated()
-			    .antMatchers("/takenote").authenticated()
+			    .antMatchers("/addnote").authenticated()
 			    .antMatchers("/takenotes").authenticated()
-			    .antMatchers("/delete/{id}").authenticated() 
-			    .antMatchers("/edit/{stt}").authenticated() 
-			    .antMatchers("/deleted/{stt}").authenticated() 
+			    .antMatchers("/takenotes/filter").authenticated() 
+			    .antMatchers("/edit/{id}").authenticated() 
+			    .antMatchers("/deleted/{id}").authenticated() 
+			    .antMatchers("/editUser/{id}").authenticated() 
 			    .anyRequest().permitAll()
 			    .and()
 			    .formLogin()
