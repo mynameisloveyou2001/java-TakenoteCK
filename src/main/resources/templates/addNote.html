@@ -21,7 +21,7 @@
 				<div class="form-group row">
 					<label class="col-form-label col-4">Title</label>
 					<div class="col-8">
-						<input type="text" class="form-control" th:field="*{tieude}" />
+						<input type="text" class="form-control" th:field="*{tieude}" required/>
 					</div>
 				</div>
 
@@ -30,7 +30,7 @@
 					<div class="col-8">
 						<p>
 							<textarea style="height: 300px; width: 371px; max-width: 300"
-								class="form-control" th:field="*{noidung}"></textarea>
+								class="form-control" th:field="*{noidung}" required></textarea>
 						</p>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 				<div class="form-group row">
 					<label class="col-form-label col-4">Date</label>
 					<div class="col-8">
-						<input type="date" class="form-control" th:field="*{ngaytao}">
+						<input type="date" class="form-control" th:field="*{ngaytao}" required>
 					</div>
 				</div>
 			</div>

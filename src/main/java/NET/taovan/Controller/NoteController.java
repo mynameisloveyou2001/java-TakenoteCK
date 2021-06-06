@@ -1,6 +1,6 @@
-package NET.taovan;
-
+package NET.taovan.Controller;
 import java.security.Principal;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import NET.taovan.Model.Notes;
+import NET.taovan.Model.User;
+import NET.taovan.Repository.NoteRepository;
+import NET.taovan.Repository.UserRepository;
+import NET.taovan.Service.NoteService;
+
 @Controller
 public class NoteController {
 	@Autowired
@@ -24,10 +30,9 @@ public class NoteController {
 	private NoteService note2;
 
 	@GetMapping("/addnote")
-	public String showNotes(Model model) {
+	public String addNotes(Model model) {
 		model.addAttribute("note", new Notes());
 		return "addNote";
-
 	}
 
 	@PostMapping("/save_note")
@@ -39,8 +44,8 @@ public class NoteController {
 	}
 
 	@RequestMapping("/takenotes")
-	public String viewNotes(Model model, @Param("keyword1") String keyword) {
-		List<Notes> notes = note2.listAll(keyword);
+	public String viewNotes(Model model, @Param("keyword") String keyword1) {
+		List<Notes> notes = note2.listAll(keyword1);
 		model.addAttribute("takenote1", notes);
 		return "shownote";
 	}
@@ -68,14 +73,14 @@ public class NoteController {
 	}
 
 	@RequestMapping("/notes/update")
-	public String update(@Param("keyword1") String keyword, Model model, @RequestParam Long id,
+	public String update(@Param("keyword") String keyword1, Model model, @RequestParam Long id,
 			@RequestParam String title, @RequestParam String content, @RequestParam Date ngaytao) {
 		Notes note = note1.findById(id).orElse(null);
 		note.setTieude(title);
 		note.setNoidung(content);
 		note.setNgaytao(ngaytao);
 		note1.save(note);
-		List<Notes> notes = note2.listAll(keyword);
+		List<Notes> notes = note2.listAll(keyword1);
 		model.addAttribute("takenote1", notes);
 		return "shownote";
 	}

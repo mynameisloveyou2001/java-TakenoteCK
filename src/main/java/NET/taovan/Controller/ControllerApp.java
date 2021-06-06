@@ -1,4 +1,4 @@
-package NET.taovan;
+package NET.taovan.Controller;
 
 import java.util.List;
 
@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import NET.taovan.Model.User;
+import NET.taovan.Repository.UserRepository;
+import NET.taovan.Service.CustomUserDetails;
 
 @Controller
 public class ControllerApp {

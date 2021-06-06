@@ -1,4 +1,4 @@
-package NET.taovan;
+package NET.taovan.Model;
 
 import java.sql.Date;
 

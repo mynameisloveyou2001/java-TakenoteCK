@@ -40,9 +40,7 @@
 					<tr th:each="note: ${takenote1}">
 						<td th:text="${note.tieude}">Title</td>
 						<td th:text="${note.noidung}">Content</td>
-						<td
-							th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(note.ngaytao)}">Date</td>
-
+						<td th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(note.ngaytao)}">Date</td>
 						<td><a th:href="@{'/deleted/' + ${note.id}}"
 							onclick="return confirm('Are you sure?');"><i
 								class="fa fa-trash" style="font-size: 20px; color: black"></i></a></td>
@@ -54,7 +52,7 @@
 			<div>&nbsp;</div>
 			<div>
 				<form style="margin-left: 107px" th:action="@{/takenotes}">
-					<input type="text" name="keyword" th:value="${keyword1}" /> &nbsp;
+					<input type="text" name="keyword1" th:value="${keyword}" /> &nbsp;
 					<input type="submit" value="Search" /> &nbsp; <input type="button"
 						value="Refresh" onclick="clearFilter()" />
 				</form>
